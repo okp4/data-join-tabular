@@ -4,7 +4,7 @@ tags: []
 
 ---
 
-# Data-join-geospatial
+# Data-join-tabular
 
 > Template for Python Projects [@okp4](okp4.com).
 
@@ -208,13 +208,13 @@ poetry run pytest -v
 Build a local docker image using the following command line:
 
 ```sh
-docker build -t data-join-geospatial .
+docker build -t data-join-tabular .
 ```
 
 Once built, you can run the container locally with the following command line:
 
 ```sh
-docker run -ti --rm data-join-geospatial
+docker run -ti --rm data-join-tabular
 ```
 
 ## Contributing

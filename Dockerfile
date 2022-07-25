@@ -31,7 +31,7 @@ RUN poetry build
 # -----
 FROM okp4/gdal-python:3.9.13
 
-LABEL org.opencontainers.image.source=https://github.com/okp4/motival-services
+LABEL org.opencontainers.image.source=https://github.com/okp4/data-join-tabular
 
 COPY --from=builder /build/dist/*.whl /tmp/whl/
 
