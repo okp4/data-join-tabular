@@ -1,4 +1,10 @@
-# Python Project Template
+---
+noteId: "dc6b5190feb111ecae102f281db96559"
+tags: []
+
+---
+
+# Data-join-geospatial
 
 > Template for Python Projects [@okp4](okp4.com).
 
@@ -6,14 +12,95 @@
 
 ## Purpose & Philosophy
 
-This repository holds the template for building python projects with a consistent set of standards accross all okp4 python projects. We are convinced that the quality of the code depends on clear and consistent coding conventions, with an automated enforcement (CI).
+This repository contains data tabular join service.
+**Description**:
+2 sets of input data, giving 1 output with associated data based on a common column.
+**Specification**:
 
-This way, the template promotes:
+- Read different file format (geojson, shp, xlsx, xsl, Xslx, csv)
+- Optional argument depending on the type of input file (ex: separator for a csv)
+- The name of the new columns created (suffix, prefix...)
+- Type of join ('left', 'right', 'outer', 'inner', 'cross)
+- Validate the output file
+
+## Technologies
+
+## [pandas.merge](https://pandas.pydata.org/docs/reference/api/pandas.merge.html)
+
+The join is done on columns or indexes. If joining columns on columns, the DataFrame indexes will be ignored. Otherwise if joining indexes on indexes or indexes on a column or columns, the index will be passed on. When performing a cross merge, no column specifications to merge on are allowed.
 
 - the use of [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), [semantic versionning](https://semver.org/) and [semantic releasing](https://github.com/cycjimmy/semantic-release-action) which automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the artifacts (project tarball, docker images, etc.)
 - a uniform way for managing the project lifecycle (depencencies management, building, testing)
 - KISS principles: simple for developers
 - a consistent coding style
+  
+## Usage
+
+The usage is given as follows:
+
+```sh
+Usage: main.py data-tabular-join [OPTIONS]
+
+  Represents cli 'tabular_join' command
+
+Options:
+  -i1, --input1 FILE              path to first file to join  [required]
+  -i2, --input2 FILE              path to second file to join  [required]
+  -s1, --sep1 TEXT                separtor for reading the first file
+  -s2, --sep2 TEXT                separtor for reading the second file
+  -sr, --sufrigh TEXT             the suffix to add to overlapping column
+                                  names in right
+  -sl, --sufleft TEXT             the suffix to add to overlapping column
+                                  names in left
+  -onm, --outname TEXT            output file name, if not provioded, output
+                                  name will be the same as file1
+  -o, --on TEXT                   Column or index level names to join on.
+                                  These must be found in both DataFrames.
+                                  If on is None and not merging on indexes
+                                  then this defaults to the intersection of
+                                  the columns in both DataFrames
+  -v, --validate [one_to_one|one_to_many|many_to_one|many_to_many]
+                                  If specified, checks if merge is of
+                                  specified type.        “one_to_one” or
+                                  “1:1”: check if merge keys are unique in
+                                  both left and right datasets.
+                                  “one_to_many” or “1:m”: check if merge keys
+                                  are unique in left dataset.
+                                  “many_to_one” or “m:1”: check if merge keys
+                                  are unique in right dataset.
+                                  “many_to_many” or “m:m”: allowed, but does
+                                  not result in checks.
+  -how, --how [left|right|outer|inner|cross]
+                                  Type of merge to be performed.    left: use
+                                  only keys from left frame, similar to a SQL
+                                  left outer join; preserve key order.
+                                  right: use only keys from right frame,
+                                  similar to a SQL right outer join; preserve
+                                  key order.    outer: use union of keys from
+                                  both frames, similar to a SQL full outer
+                                  join; sort keys lexicographically.    inner:
+                                  use intersection of keys from both frames,
+                                  similar to a SQL inner join; preserve the
+                                  order of the left keys.    cross: creates
+                                  the cartesian product from both frames,
+                                  preserves the order of the left keys.
+  -so, --sort TEXT                Sort the join keys lexicographically in the
+                                  result DataFrame. If False, the order of the
+                                  join keys depends on the join type (how
+                                  keyword).
+  -or, --onrigh TEXT              Column name to join in the right DataFrame.
+  -ol, --onleft TEXT              Column name to join in the left DataFrame
+  -out, --output DIRECTORY        output directory where output file will be
+                                  written  [default: .]
+  -f, --force                     overwrite existing file
+  --dry-run                       passthrough, will not write anything
+  --help                          Show this message and exit.
+
+```
+
+```shell
+poetry run python3 src/data_join_tabular/main.py data-tabular-join -i1 ./data/inputs/DEPARTEMENT.shp -i2 ./data/inputs/ADECOGC_3-1_SHP_WGS84G_FRA/COMMUNE.shp -o INSEE_DEP -f -out ./data/outputs
+```
 
 ## How to use
 
@@ -121,13 +208,13 @@ poetry run pytest -v
 Build a local docker image using the following command line:
 
 ```sh
-docker build -t my-app .
+docker build -t data-join-geospatial .
 ```
 
 Once built, you can run the container locally with the following command line:
 
 ```sh
-docker run -ti --rm my-app
+docker run -ti --rm data-join-geospatial
 ```
 
 ## Contributing
