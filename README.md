@@ -39,9 +39,9 @@ The join is done on columns or indexes. If joining columns on columns, the DataF
 The usage is given as follows:
 
 ```sh
-Usage: main.py data-tabular-join [OPTIONS]
+Usage: data-join-tabular join [OPTIONS]
 
-  Represents cli 'tabular_join' command
+  Represents cli 'join' command
 
 Options:
   -i1, --input1 FILE              path to first file to join  [required]
@@ -95,7 +95,6 @@ Options:
   -f, --force                     overwrite existing file
   --dry-run                       passthrough, will not write anything
   --help                          Show this message and exit.
-
 ```
 
 ```shell
