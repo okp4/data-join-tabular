@@ -41,4 +41,4 @@ RUN python3 -m pip install --no-cache-dir /tmp/whl/*.whl \
   && apt-get clean -y  \
   && rm -rf /var/lib/apt/lists/*
 
-ENTRYPOINT ["data-join-geospatial"]
+ENTRYPOINT ["data-join-tabular"]
