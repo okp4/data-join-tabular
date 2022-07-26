@@ -170,7 +170,7 @@ def version():
     default=False,
     help="passthrough, will not write anything",
 )
-def data_tabular_join(
+def join(
     input_file1: str,
     input_file2: str,
     separator1: str,
@@ -188,7 +188,7 @@ def data_tabular_join(
     overwrite: bool,
     dry_run: bool,
 ):
-    """Represents cli 'tabular_join' command"""
+    """Represents cli 'join' command"""
     return tabular_join(
         input_file1,
         input_file2,
