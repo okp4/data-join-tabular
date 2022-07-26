@@ -1,5 +1,5 @@
-import src.data_join_tabular.__init__ as init
-from src.data_join_tabular.functions import tabular_join
+import data_join_tabular.__init__ as init
+from data_join_tabular.functions import tabular_join
 import logging
 import click
 
