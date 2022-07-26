@@ -59,7 +59,7 @@ def test_join_spatial(tmpdir_factory, arguments):
     # act
     with runner.isolated_filesystem(temp_dir=out_folder):
         result: Result = runner.invoke(
-            cli=main.cli, args=["data-tabular-join"] + arguments, catch_exceptions=False
+            cli=main.cli, args=["join"] + arguments, catch_exceptions=False
         )
         if result.exit_code != 0:
             print(result.output)
