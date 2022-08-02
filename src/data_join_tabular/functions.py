@@ -9,7 +9,7 @@ logging.basicConfig(
 )
 
 
-def read_file(filepath: str, sep=";"):
+def read_file(filepath: str, sep=","):
     """Documentation:
     inputs:
             filepath: DataFrame to save

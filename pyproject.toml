@@ -1,19 +1,22 @@
 [tool.poetry]
 name = "data-join-tabular"
 version = "0.1.0"
-description = ""
-authors = ["NourKired <n.kired@okp4.com>"]
+description = "data tabular join service"
+authors = ["opensource-OKP4 <opensource@okp4.com>"]
+license = "BSD 3-Clause License"
 
 [tool.poetry.dependencies]
 python = "^3.9"
 geopandas = "^0.11.0"
-tqdm = "^4.64.0"
-flake8 = "^4.0.1"
-pytest = "^7.1.2"
 
 [tool.poetry.scripts]
 data-join-tabular = "data_join_tabular.main:cli"
 
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+flake8 = "^5.0.3"
+mypy = "^0.971"
+black = "^22.6.0"
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
