@@ -86,9 +86,9 @@ def version():
     "-o",
     "--on",
     "on",
-    type=str,
+    multiple=True,
     required=False,
-    default=None,
+    default=["json"],
     help="Column or index level names to join on. These must be found in both DataFrames.\
         If on is None and not merging on indexes then this defaults to the intersection of the columns in both DataFrames",
 )
@@ -199,7 +199,7 @@ def join(
         output_file_name,
         on_right,
         on_left,
-        on,
+        list(on),
         how,
         sort,
         validate,
