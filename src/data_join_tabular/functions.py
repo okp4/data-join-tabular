@@ -24,6 +24,8 @@ def read_file(filepath: str, sep=","):
         return pd.read_excel(filepath, sep=sep)
     if fileformat in ("csv"):
         return pd.read_csv(filepath, sep=sep)
+    if fileformat in ("geojson"):
+        return pd.read_json(filepath)
     else:
         logging.error("this file cannot be processed....")
 
@@ -55,7 +57,7 @@ def tabular_join(
     output_file_name: str,
     on_right: str,
     on_left: str,
-    on: str,
+    on: list,
     how: str,
     sort: bool,
     validate: str,
@@ -91,7 +93,8 @@ def tabular_join(
             df2[on_right].dtype
         )  # they have to be of the same type
     else:
-        df1[on] = df1[on].astype(df2[on].dtype)  # they have to be of the same type
+        print(on)
+        df1[on] = df1[on].astype(df2[on].dtypes)  # they have to be of the same type
     logging.info("start merging ...")
     df_out = pd.merge(
         df1,
