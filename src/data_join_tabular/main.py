@@ -180,13 +180,13 @@ def join(
     output_file_name: str,
     on_right: str,
     on_left: str,
-    on: list,
     how: str,
     sort: bool,
     validate: str,
     out_dir: str,
     overwrite: bool,
     dry_run: bool,
+    on,
 ):
     """Represents cli 'join' command"""
     return tabular_join(
@@ -199,13 +199,13 @@ def join(
         output_file_name,
         on_right,
         on_left,
-        on,
         how,
         sort,
         validate,
         out_dir,
         overwrite,
         dry_run,
+        on,
     )
 
 
