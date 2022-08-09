@@ -30,10 +30,16 @@ def get_arguments(test_path1: str, test_path2: str) -> list[list[str]]:
             os.path.abspath(file1),
             "-i2",
             os.path.abspath(file2),
-            "-ol",
-            "NDEPT",
-            "-or",
-            "ndept",
+            "-o",
+            "INSEE_REG",
+            "-s1",
+            ",",
+            "-s2",
+            ",",
+            "-sl",
+            "_left",
+            "-sr",
+            "_right",
             "-out",
             ".",
             "-f",
@@ -59,7 +65,9 @@ def test_join_spatial(tmpdir_factory, arguments):
     # act
     with runner.isolated_filesystem(temp_dir=out_folder):
         result: Result = runner.invoke(
-            cli=main.cli, args=["join"] + arguments, catch_exceptions=False
+            cli=main.cli,
+            args=["join"] + arguments,
+            catch_exceptions=False,
         )
         if result.exit_code != 0:
             print(result.output)

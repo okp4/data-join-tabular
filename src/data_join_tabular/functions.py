@@ -16,7 +16,6 @@ def read_file(filepath: str, sep=","):
             sep : the field separator value
     this function reads files in geojson, shp,xlsx,xsl,Xslx,csv format
     """
-    print(filepath, sep)
     fileformat = filepath.split(".")[-1]
     if fileformat in ("geojson", "shp"):
         return gpd.read_file(filepath)
@@ -88,13 +87,12 @@ def tabular_join(
     logging.info("start reading files ...")
     df1 = read_file(file_path1, sep_file1)
     df2 = read_file(file_path2, sep_file2)
+    on = None if on in (None, [], ()) else list(on)
     if on is None:
         df1[on_left] = df1[on_left].astype(
             df2[on_right].dtype
         )  # they have to be of the same type
-    else:
-        print(on)
-        df1[on] = df1[on].astype(df2[on].dtypes)  # they have to be of the same type
+
     logging.info("start merging ...")
     df_out = pd.merge(
         df1,

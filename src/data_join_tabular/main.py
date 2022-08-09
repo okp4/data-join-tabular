@@ -62,7 +62,7 @@ def version():
     "suffix_right",
     type=str,
     required=False,
-    default="_right",
+    default="",
     help="the suffix to add to overlapping column names in right",
 )
 @click.option(
@@ -71,7 +71,7 @@ def version():
     "suffix_left",
     type=str,
     required=False,
-    default="_left",
+    default="",
     help="the suffix to add to overlapping column names in left",
 )
 @click.option(
@@ -88,7 +88,6 @@ def version():
     "on",
     multiple=True,
     required=False,
-    default=["json"],
     help="Column or index level names to join on. These must be found in both DataFrames.\
         If on is None and not merging on indexes then this defaults to the intersection of the columns in both DataFrames",
 )
@@ -126,7 +125,8 @@ def version():
     type=str,
     required=False,
     default=None,
-    help="Sort the join keys lexicographically in the result DataFrame. If False, the order of the join keys depends on the join type (how keyword).",
+    help="Sort the join keys lexicographically in the result DataFrame. If False,\
+        the order of the join keys depends on the join type (how keyword).",
 )
 @click.option(
     "-or",
@@ -180,7 +180,7 @@ def join(
     output_file_name: str,
     on_right: str,
     on_left: str,
-    on: str,
+    on: list,
     how: str,
     sort: bool,
     validate: str,
@@ -199,7 +199,7 @@ def join(
         output_file_name,
         on_right,
         on_left,
-        list(on),
+        on,
         how,
         sort,
         validate,

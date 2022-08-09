@@ -12,8 +12,9 @@ def check(result_path: str, ref_path: str):
         csv_ref
     ), f"referenced csv file with name {name} do not exists"
     df_ref: pd.DataFrame = pd.read_csv(csv_ref, low_memory=False)
+    df_ref = df_ref.sort_values(by=[df_ref.columns[0]])
     df_out: pd.DataFrame = pd.read_csv(csv_outs, low_memory=False)
-    df_out.sort_values(by=list(df_out.columns), inplace=True)
+    df_out = df_out.sort_values(by=[df_ref.columns[0]])
     assert df_ref.equals(
         df_out
     ), f"csv {name} should be the same than the reference csv"
