@@ -108,5 +108,6 @@ def tabular_join(
     if output_file_name is None:
         output_file_name = os.path.basename(file_path1).split(".")[:-1][0].lower()
     output_path = os.path.join(out_dir, output_file_name + ".csv")
+    logging.info("process files")
     if not dry_run:
         to_csv(df_out, output_path, overwrite)
