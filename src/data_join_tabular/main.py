@@ -62,7 +62,7 @@ def version():
     "suffix_right",
     type=str,
     required=False,
-    default="",
+    default="_right",
     help="the suffix to add to overlapping column names in right",
 )
 @click.option(
@@ -71,7 +71,7 @@ def version():
     "suffix_left",
     type=str,
     required=False,
-    default="",
+    default="_left",
     help="the suffix to add to overlapping column names in left",
 )
 @click.option(

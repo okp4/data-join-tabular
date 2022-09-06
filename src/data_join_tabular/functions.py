@@ -87,7 +87,7 @@ def tabular_join(
     logging.info("start reading files ...")
     df1 = read_file(file_path1, sep_file1)
     df2 = read_file(file_path2, sep_file2)
-    on = None if on in (None, [], ()) else [on]
+    on = None if on in (None, [], ()) else list(on)
     if on is None:
         df1[on_left] = df1[on_left].astype(
             df2[on_right].dtype
