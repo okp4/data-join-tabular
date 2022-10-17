@@ -117,7 +117,7 @@ def tabular_join(
             sort=sort,
             validate=validate,
         )
-    except:
+    except Exception:
         df_out = pd.merge(
             df1,
             df2,

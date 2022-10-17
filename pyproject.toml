@@ -7,11 +7,8 @@ license = "BSD 3-Clause License"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-geopandas = "^0.11.0"
-datatables = "^0.4.9"
-dask = "^2022.9.2"
-GenDoc = "^1.0.1"
-geofeather = "^0.3.0"
+geopandas = "^0.11.1"
+pandas = "^1.5.0"
 
 [tool.poetry.scripts]
 data-join-tabular = "data_join_tabular.main:cli"
