@@ -9,13 +9,27 @@ logging.basicConfig(
 )
 
 
-def read_file(filepath: str, sep=","):
+def get_on(on, on_left, on_right, df_right, df_left):
+    df_right = df_right.rename(columns=dict(zip(on_right, on_left)))
+    on = on_left
+    if type(on) != str:
+        for col in on:
+            df_right[col] = df_right[col].astype(
+                df_left[col].dtype
+            )  # they have to be of the same type
+    else:
+        df_right[on] = df_right[on].astype(df_left[on].dtype)
+    return on, df_right
+
+
+def read_file(filepath: str, sep):
     """Documentation:
     inputs:
             filepath: DataFrame to save
             sep : the field separator value
     this function reads files in geojson, shp,xlsx,xsl,Xslx,csv format
     """
+    sep = "," if sep is None else sep
     fileformat = filepath.split(".")[-1]
     if fileformat in ("geojson", "shp"):
         return gpd.read_file(filepath)
@@ -88,23 +102,31 @@ def tabular_join(
     df1 = read_file(file_path1, sep_file1)
     df2 = read_file(file_path2, sep_file2)
     on = None if on in (None, [], ()) else list(on)
-    if on is None:
-        df1[on_left] = df1[on_left].astype(
-            df2[on_right].dtype
-        )  # they have to be of the same type
-
-    logging.info("start merging ...")
-    df_out = pd.merge(
-        df1,
-        df2,
-        how=how,
-        on=on,
-        left_on=on_left,
-        right_on=on_right,
-        sort=sort,
-        suffixes=(suffix_left, suffix_right),
-        validate=validate,
-    )
+    if on is not None:
+        pass
+    else:
+        on, df2 = get_on(on, on_left, on_right, df2, df1)
+    logging.info("start joining ...")
+    try:
+        df_out = df1.join(
+            df2,
+            how=how,
+            on=on,
+            lsuffix=suffix_left,
+            rsuffix=suffix_right,
+            sort=sort,
+            validate=validate,
+        )
+    except:
+        df_out = pd.merge(
+            df1,
+            df2,
+            how=how,
+            on=on,
+            suffixes=(suffix_left, suffix_right),
+            sort=sort,
+            validate=validate,
+        )
     if output_file_name is None:
         output_file_name = os.path.basename(file_path1).split(".")[:-1][0].lower()
     output_path = os.path.join(out_dir, output_file_name + ".csv")

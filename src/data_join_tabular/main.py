@@ -9,6 +9,16 @@ logging.basicConfig(
 )
 
 
+def check_join_column(cols_left, cols_right):
+    assert type(cols_left) == type(
+        cols_right
+    ), "cols_left and cols_right must be the same type"
+    if type(cols_left) == list:
+        assert len(cols_left) == len(
+            cols_right
+        ), "cols_left and cols_right must have the same length"
+
+
 @click.group
 def cli():
     """Represents the root cli function"""
@@ -132,7 +142,7 @@ def version():
     "-or",
     "--onrigh",
     "on_right",
-    type=str,
+    multiple=True,
     required=False,
     help="Column name to join in the right DataFrame.",
 )
@@ -140,7 +150,7 @@ def version():
     "-ol",
     "--onleft",
     "on_left",
-    type=str,
+    multiple=True,
     required=False,
     help="Column name to join in the left DataFrame",
 )
@@ -189,6 +199,7 @@ def join(
     on,
 ):
     """Represents cli 'join' command"""
+    check_join_column(on_left, on_right)
     return tabular_join(
         input_file1,
         input_file2,

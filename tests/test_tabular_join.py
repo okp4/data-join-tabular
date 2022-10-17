@@ -23,21 +23,17 @@ def test_version_displays_library_version():
 
 def get_arguments(test_path1: str, test_path2: str) -> list[list[str]]:
     input_files1 = sorted(glob.glob(os.path.join(test_path1, "*.csv")))
-    input_files2 = [glob.glob(os.path.join(test_path2, "*"))[0] for _ in input_files1]
+    input_files2 = sorted(glob.glob(os.path.join(test_path2, "*.csv")))
     return [
         [
             "-i1",
-            os.path.abspath(file1),
+            os.path.abspath(input_files1[0]),
             "-i2",
-            os.path.abspath(file2),
+            os.path.abspath(input_files2[0]),
             "-or",
             "INSEE_REG",
             "-ol",
             "INSEE_REG",
-            "-s1",
-            ",",
-            "-s2",
-            ",",
             "-sl",
             "_left",
             "-sr",
@@ -45,8 +41,37 @@ def get_arguments(test_path1: str, test_path2: str) -> list[list[str]]:
             "-out",
             ".",
             "-f",
+        ],
+        [
+            "-i1",
+            os.path.abspath(input_files1[1]),
+            "-i2",
+            os.path.abspath(input_files2[1]),
+            "-o",
+            "A",
+            "-o",
+            "B",
+            "-out",
+            ".",
+            "-f",
+        ],
+        [
+            "-i1",
+            os.path.abspath(input_files1[2]),
+            "-i2",
+            os.path.abspath(input_files2[2]),
+            "-or",
+            "A2",
+            "-or",
+            "B2",
+            "-ol",
+            "A1",
+            "-ol",
+            "B1",
+            "-out",
+            ".",
+            "-f",
         ]
-        for (file1, file2) in zip(input_files1, input_files2)
     ]
 
 
@@ -57,7 +82,7 @@ def get_arguments(test_path1: str, test_path2: str) -> list[list[str]]:
         "./tests/data/inputs2",
     ),
 )
-def test_join_spatial(tmpdir_factory, arguments):
+def test_join_tabular(tmpdir_factory, arguments):
 
     # arrange
     runner: CliRunner = CliRunner()
