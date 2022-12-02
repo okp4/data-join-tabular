@@ -18,12 +18,12 @@ plugins:
               hasChanged: true
               numMatches: 1
               numReplacements: 1
-        - files: [ my_app/__init__.py ]
+        - files: [ data_join_tabular/__init__.py ]
           from: ^__version__ = '.+'
           to: __version__ = '${nextRelease.version}'
           countMatches: true
           results:
-            - file: my_app/__init__.py
+            - file: data_join_tabular/__init__.py
               hasChanged: true
               numMatches: 1
               numReplacements: 1
@@ -32,6 +32,6 @@ plugins:
     - assets:
         - CHANGELOG.md
         - LICENSE
-        - my_app/__init__.py
+        - data_join_tabular/__init__.py
         - pyproject.toml
       message: "chore(release): perform release ${nextRelease.version}"

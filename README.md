@@ -1,19 +1,128 @@
-# Python Project Template
+---
+noteId: "dc6b5190feb111ecae102f281db96559"
+tags: []
 
-> Template for Python Projects [@okp4](okp4.com).
+---
 
-[![conventional commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+# Data-join-tabular
+
+[![version](https://img.shields.io/github/v/release/okp4/template-python?style=for-the-badge&logo=github)](https://github.com/okp4/template-python/releases)
+[![lint](https://img.shields.io/github/workflow/status/okp4/template-python/Lint?label=lint&style=for-the-badge&logo=github)](https://github.com/okp4/template-python/actions/workflows/lint.yml)
+[![build](https://img.shields.io/github/workflow/status/okp4/template-python/Build?label=build&style=for-the-badge&logo=github)](https://github.com/okp4/template-python/actions/workflows/build.yml)
+[![test](https://img.shields.io/github/workflow/status/okp4/template-python/Test?label=test&style=for-the-badge&logo=github)](https://github.com/okp4/template-python/actions/workflows/test.yml)
+[![codecov](https://img.shields.io/codecov/c/github/okp4/template-python?style=for-the-badge&token=G5OBC2RQKX&logo=codecov)](https://codecov.io/gh/okp4/template-python)
+[![conventional commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=for-the-badge&logo=conventionalcommits)](https://conventionalcommits.org)
+[![contributor covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](https://github.com/okp4/.github/blob/main/CODE_OF_CONDUCT.md)
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg?style=for-the-badge)](https://opensource.org/licenses/BSD-3-Clause)
 
 ## Purpose & Philosophy
 
-This repository holds the template for building python projects with a consistent set of standards accross all okp4 python projects. We are convinced that the quality of the code depends on clear and consistent coding conventions, with an automated enforcement (CI).
+This repository contains data tabular join service.
+**Description**:
+2 sets of input data, giving 1 output with associated data based on a common column.
+**Specification**:
 
-This way, the template promotes:
+- Read different file format (geojson, shp, xlsx, xsl, Xslx, csv)
+- Optional argument depending on the type of input file (ex: separator for a csv)
+- The name of the new columns created (suffix, prefix...)
+- Type of join ('left', 'right', 'outer', 'inner', 'cross)
+- Validate the output file
+
+## Technologies
+
+## [pandas.merge](https://pandas.pydata.org/docs/reference/api/pandas.merge.html)
+
+The join is done on columns or indexes. If joining columns on columns, the DataFrame indexes will be ignored. Otherwise if joining indexes on indexes or indexes on a column or columns, the index will be passed on. When performing a cross merge, no column specifications to merge on are allowed.
 
 - the use of [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), [semantic versionning](https://semver.org/) and [semantic releasing](https://github.com/cycjimmy/semantic-release-action) which automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the artifacts (project tarball, docker images, etc.)
 - a uniform way for managing the project lifecycle (depencencies management, building, testing)
 - KISS principles: simple for developers
 - a consistent coding style
+  
+## Usage
+
+The usage is given as follows:
+
+```sh
+Usage: data-join-tabular join [OPTIONS]
+
+  Represents cli 'join' command
+
+Options:
+  -i1, --input1 FILE              path to first file to join  [required]
+
+  -i2, --input2 FILE              path to second file to join  [required]
+
+  -s1, --sep1 TEXT                separtor for reading the first file
+
+  -s2, --sep2 TEXT                separtor for reading the second file
+
+  -sr, --sufrigh TEXT             the suffix to add to overlapping column
+                                  names in right
+
+  -sl, --sufleft TEXT             the suffix to add to overlapping column
+                                  names in left
+
+  -onm, --outname TEXT            output file name, if not provioded, output
+                                  name will be the same as file1
+
+  -o, --on TEXT                   Column or index level names to join on.
+                                  These must be found in both DataFrames.
+                                  If on is None and not merging on indexes
+                                  then this defaults to the intersection of
+                                  the columns in both DataFrames
+
+  -v, --validate [one_to_one|one_to_many|many_to_one|many_to_many]
+                                  If specified, checks if join is of specified type. 
+                                  * "one_to_one"” or "1:1": 
+                                  check if join keys are unique in both left and right datasets.
+                                   * "one_to_many" or "1:m": 
+                                   check if join keys are unique in left dataset. 
+                                   * "many_to_one" or "m:1": 
+                                   check if join keys are unique in right dataset. 
+                                   * "many_to_many" or "m:m": allowed, but does not result in checks.
+
+  -how, --how [left|right|outer|inner|cross]
+                                  How to handle the operation of the two objects.
+
+                                      left: use calling frame’s index 
+                                      (or column if on is specified)
+
+                                      right: use other’s index.
+
+                                      outer: form union of calling frame’s index 
+                                      (or column if on is specified) with other’s index,
+                                      and sort it. lexicographically.
+
+                                      inner: form intersection of calling frame’s index 
+                                      (or column if on is specified) with other’s index, 
+                                      preserving the order of the calling’s one.
+
+                                      cross: creates the cartesian product from both frames, 
+                                      preserves the order of the left keys.
+
+  -so, --sort TEXT                Sort the join keys lexicographically in the
+                                  result DataFrame. If False, the order of the
+                                  join keys depends on the join type (how
+                                  keyword).
+
+  -or, --onrigh TEXT              Column name to join in the right DataFrame.
+
+  -ol, --onleft TEXT              Column name to join in the left DataFrame
+  
+  -out, --output DIRECTORY        output directory where output file will be
+                                  written  [default: .]
+
+  -f, --force                     overwrite existing file
+
+  --dry-run                       passthrough, will not write anything
+
+  --help                          Show this message and exit.
+```
+
+```shell
+poetry run data-join-tabular join -i1 ./tests/data/inputs1/in1.csv -i2 ./tests/data/inputs2/in1.csv -o INSEE_REG -out . -f
+```
 
 ## How to use
 
@@ -52,6 +161,7 @@ This template provides the following:
 - [flake8](https://flake8.pycqa.org) for linting python code.
 - [mypy](http://mypy-lang.org/) for static type checks.
 - [pytest](https://docs.pytest.org) for unit testing.
+- [click](https://palletsprojects.com/p/click/) to easily setup your project commands
 
 The project is also configured to enforce code quality by declaring some CI workflows:
 
@@ -121,17 +231,18 @@ poetry run pytest -v
 Build a local docker image using the following command line:
 
 ```sh
-docker build -t my-app .
+docker build -t data-join-tabular .
 ```
 
 Once built, you can run the container locally with the following command line:
 
 ```sh
-docker run -ti --rm my-app
+docker run -ti --rm data-join-tabular
 ```
 
-## Contributing
+## You want to get involved? 😍
 
-So you want to contribute? Great. We appreciate any help you're willing to give. Don't hesitate to open issues and/or submit pull requests.
+Please check out OKP4 health files :
 
-Remember that this is the template we use at [OKP4](okp4.com/), and that we apply everywhere in our private and public Python projects. This is why we may have to refuse change requests simply because they do not comply with our internal requirements, and not because they are not relevant.
+- [Contributing](https://github.com/okp4/.github/blob/main/CONTRIBUTING.md)
+- [Code of conduct](https://github.com/okp4/.github/blob/main/CODE_OF_CONDUCT.md)

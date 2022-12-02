@@ -1,5 +1,12 @@
 .vscode/
 .idea/
-
+.notebook/
 dist/
 *.pyc
+.vscode/
+.idea/
+data_process/
+dist/
+*.pyc
+*.DS_Store
+
