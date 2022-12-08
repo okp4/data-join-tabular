@@ -10,9 +10,6 @@ logging.basicConfig(
 
 
 def check_join_column(cols_left, cols_right):
-    assert type(cols_left) == type(
-        cols_right
-    ), "cols_left and cols_right must be the same type"
     if type(cols_left) == list:
         assert len(cols_left) == len(
             cols_right
@@ -173,6 +170,15 @@ def version():
     help="overwrite existing file",
 )
 @click.option(
+    "-ft",
+    "--fix-types",
+    "fix_types",
+    type=bool,
+    is_flag=True,
+    default=False,
+    help="fix types issues",
+)
+@click.option(
     "--dry-run",
     "dry_run",
     type=bool,
@@ -188,6 +194,7 @@ def join(
     suffix_right: str,
     suffix_left: str,
     output_file_name: str,
+    on: str,
     on_right: str,
     on_left: str,
     how: str,
@@ -195,8 +202,8 @@ def join(
     validate: str,
     out_dir: str,
     overwrite: bool,
+    fix_types: bool,
     dry_run: bool,
-    on,
 ):
     """Represents cli 'join' command"""
     check_join_column(on_left, on_right)
@@ -208,6 +215,7 @@ def join(
         suffix_right,
         suffix_left,
         output_file_name,
+        on,
         on_right,
         on_left,
         how,
@@ -215,8 +223,8 @@ def join(
         validate,
         out_dir,
         overwrite,
+        fix_types,
         dry_run,
-        on,
     )
 
 
