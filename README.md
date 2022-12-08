@@ -94,8 +94,9 @@ Options:
                                   result DataFrame. If False,        the order
                                   of the join keys depends on the join type
                                   (how keyword).
-  -or, --onrigh TEXT              Column name to join in the right DataFrame.
-  -ol, --onleft TEXT              Column name to join in the left DataFrame
+  -or, --onrigh TEXT              Column name to join in the right DataFrame
+  -ol, --onleft TEXT              Column name to join in the left DataFrame, 
+                                  it must be sorted to match the on_right columns
   -out, --output DIRECTORY        output directory where output file will be
                                   written  [default: .]
   -f, --force                     overwrite existing file

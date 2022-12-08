@@ -10,6 +10,13 @@ logging.basicConfig(
 )
 
 
+def check_join_column(cols_left, cols_right):
+    if type(cols_left) == list:
+        assert len(cols_left) == len(
+            cols_right
+        ), "cols_left and cols_right must have the same length"
+
+
 def read_file(filepath: str, sep: str):
     """Documentation:
     inputs:
@@ -17,6 +24,7 @@ def read_file(filepath: str, sep: str):
             sep : the field separator value
     this function reads files in geojson, shp,xlsx,xsl,Xslx,csv format
     """
+    file_name: str = os.path.basename(filepath).split(".")[0]
     sep = "," if sep is None else sep
     fileformat = filepath.split(".")[-1]
     if fileformat in ("geojson", "shp"):
@@ -24,7 +32,7 @@ def read_file(filepath: str, sep: str):
     if fileformat in ("csv"):
         return pd.read_csv(filepath, sep=sep)
     else:
-        logging.error("this file cannot be processed....")
+        logging.error(f"file with name {file_name}cannot be processed....")
 
 
 def check_types(on, on_left, on_right, df_right, df_left):
@@ -39,14 +47,10 @@ def check_types(on, on_left, on_right, df_right, df_left):
     """
     if on != ():
         for col in on:
-            assert "the columns to be merged must have the same type", (
-                df_right[col].dtype == df_left[col].dtype
-            )
+            assert f"the column with name {str(col)} to be merged must have the same type on both dataset", (df_right[col].dtype == df_left[col].dtype)
     else:
         for (col_right, col_left) in zip(on_right, on_left):
-            assert "the columns to be merged must have the same type", (
-                df_right[col_right].dtype == df_left[col_left].dtype
-            )
+            assert "the columns {col_left} of the first dataset and {col_right} of the second dataset must have the same type", (df_right[col_right].dtype == df_left[col_left].dtype)
 
 
 def fix_type(on, on_left, on_right, df_right, df_left):
@@ -61,11 +65,15 @@ def fix_type(on, on_left, on_right, df_right, df_left):
     """
     if on != ():
         for col in on:
-            df_right[col] = df_right[col].astype(
-                df_left[col].dtype
-            )  # they have to be of the same type
+            logging.info(
+                f"Converting type of {str(col)} column of the second data set to match the type column in the first set"
+            )
+            df_right[col] = df_right[col].astype(df_left[col].dtype)
     else:
         for (col_right, col_left) in zip(on_right, on_left):
+            logging.info(
+                f"Converting type of {str(col_right)} column to match the type of {str(col_left)} column"
+            )
             df_right[col_right] = df_right[col_right].astype(df_left[col_left].dtype)
     return df_left, df_right
 
@@ -134,6 +142,7 @@ def tabular_join(
             dry_run: ,
     this function saves the Dataframe in the directory
     """
+    check_join_column(on_left, on_right)
     logging.info("start reading files ...")
     df1 = read_file(file_path1, sep_file1)
     df2 = read_file(file_path2, sep_file2)
