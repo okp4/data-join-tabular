@@ -26,6 +26,7 @@ def read_file(filepath: str, sep: str):
     else:
         logging.error("this file cannot be processed....")
 
+
 def check_types(on, on_left, on_right, df_right, df_left):
     """Documentation:
     inputs:
@@ -68,13 +69,12 @@ def fix_type(on, on_left, on_right, df_right, df_left):
             df_right[col_right] = df_right[col_right].astype(df_left[col_left].dtype)
     return df_left, df_right
 
+
 def columns_to_be_merged(on, on_left, on_right):
     on = None if on == () else on
     on_left = None if on_left == () else on_left
     on_right = None if on_right == () else on_right
     return on, on_left, on_right
-
-
 
 
 def to_csv(df: pd.DataFrame, output_path: str, overwrite: bool):
