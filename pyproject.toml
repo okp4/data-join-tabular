@@ -18,7 +18,7 @@ pytest = "^7.1.2"
 flake8 = "^5.0.3"
 mypy = "^0.991"
 black = "^22.6.0"
-ipykernel = "^6.15.1"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
