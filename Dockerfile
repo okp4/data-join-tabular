@@ -3,7 +3,7 @@ FROM okp4/gdal-python:3.9.13 AS builder
 
 ENV \
     # poetry:
-    POETRY_VERSION=1.2.0 \
+    POETRY_VERSION=1.3.1 \
     POETRY_NO_INTERACTION=1 \
     POETRY_VIRTUALENVS_CREATE=false \
     POETRY_CACHE_DIR='/var/cache/pypoetry' \
