@@ -19,11 +19,11 @@ tags: []
 
 This repository contains data tabular join service.
 
-**Description**:
+### Description
 
 2 sets of input data, giving 1 output with associated data based on a common column.
 
-**Specification**:
+### Specification
 
 - Read different file format (csv, geojson, shp)
 - Optional argument depending on the type of input file (ex: separator for a csv)
@@ -33,12 +33,12 @@ This repository contains data tabular join service.
 
 ## Technologies
 
-## [pandas.merge](https://pandas.pydata.org/docs/reference/api/pandas.merge.html)
+__[pandas.merge](https://pandas.pydata.org/docs/reference/api/pandas.merge.html)__
 
 The join is done on columns or indexes. If joining columns on columns, the DataFrame indexes will be ignored. Otherwise if joining indexes on indexes or indexes on a column or columns, the index will be passed on. When performing a cross merge, no column specifications to merge on are allowed.
 
-- the use of [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), [semantic versionning](https://semver.org/) and [semantic releasing](https://github.com/cycjimmy/semantic-release-action) which automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the artifacts (project tarball, docker images, etc.)
-- a uniform way for managing the project lifecycle (depencencies management, building, testing)
+- the use of [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/), [semantic versioning](https://semver.org/) and [semantic releasing](https://github.com/cycjimmy/semantic-release-action) which automates the whole package release workflow including: determining the next version number, generating the release notes, and publishing the artifacts (project tarball, docker images, etc.)
+- a uniform way for managing the project lifecycle (dependencies management, building, testing)
 - KISS principles: simple for developers
 - a consistent coding style
   
@@ -112,15 +112,6 @@ Options:
 poetry run data-join-tabular  join -i1 ./tests/data/inputs1/input_test1.csv -i2 ./tests/data/inputs2/input_test1.csv -o categorie -o statut -o effectif -o genre -s1 ';' -s2 ';' -out ./tests/data -f
 ```
 
-## How to use
-
-> 🚨 do not fork this repository as it is a [template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
-
-1. Click on [Use this template](https://github.com/okp4/data-join-tabular/generate)
-2. Give a name to your project
-3. Wait until the first run of CI finishes
-4. Clone your new project and happy coding!
-
 ## System requirements
 
 ### Python
@@ -137,7 +128,7 @@ The repository uses [Poetry](https://python-poetry.org) as python packaging and 
 
 ### Docker
 
-You can follow the link below on how to install and configure **Docker** on your local machine:
+You can follow the link below on how to install and configure __Docker__ on your local machine:
 
 - [Docker Install Documentation](https://docs.docker.com/install/)
 
@@ -172,13 +163,13 @@ poetry install
 
 > ⚠️ Be sure to write code compliant with linters or else you'll be rejected by the CI.
 
-**Code linting** is performed by [flake8](https://flake8.pycqa.org).
+__Code linting__ is performed by [flake8](https://flake8.pycqa.org).
 
 ```sh
 poetry run flake8 --count --show-source --statistics
 ```
 
-**Static type check** is performed by [mypy](http://mypy-lang.org/).
+__Static type check__ is performed by [mypy](http://mypy-lang.org/).
 
 ```sh
 poetry run mypy .
@@ -187,13 +178,13 @@ poetry run mypy .
 To improve code quality, we use other linters in our workflows, if you don't want to be rejected by the CI,
 please check these additional linters.
 
-**Markdown linting** is performed by [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli).
+__Markdown linting__ is performed by [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli).
 
 ```sh
 markdownlint "**/*.md"  
 ```
 
-**Docker linting** is performed by [dockerfilelint](https://github.com/replicatedhq/dockerfilelint) and
+__Docker linting__ is performed by [dockerfilelint](https://github.com/replicatedhq/dockerfilelint) and
 [hadolint](https://github.com/hadolint/hadolint).
 
 ```sh
