@@ -6,7 +6,7 @@ plugins:
   - "@semantic-release/release-notes-generator"
   - - "@semantic-release/changelog"
     - changelogFile: CHANGELOG.md
-      changelogTitle: "# Template python Changelog"
+      changelogTitle: "# Data join tabular Changelog"
   - - '@google/semantic-release-replace-plugin'
     - replacements:
         - files: [ pyproject.toml ]
