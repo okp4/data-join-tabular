@@ -6,11 +6,11 @@ tags: []
 
 # Data-join-tabular
 
-[![version](https://img.shields.io/github/v/release/okp4/template-python?style=for-the-badge&logo=github)](https://github.com/okp4/template-python/releases)
-[![lint](https://img.shields.io/github/actions/workflow/status/okp4/template-python/lint.yml?branch=main&label=lint&style=for-the-badge&logo=github)](https://github.com/okp4/template-python/actions/workflows/lint.yml)
-[![build](https://img.shields.io/github/actions/workflow/status/okp4/template-python/build.yml?branch=main&label=build&style=for-the-badge&logo=github)](https://github.com/okp4/template-python/actions/workflows/build.yml)
-[![test](https://img.shields.io/github/actions/workflow/status/okp4/template-python/test.yml?branch=main&label=test&style=for-the-badge&logo=github)](https://github.com/okp4/template-python/actions/workflows/test.yml)
-[![codecov](https://img.shields.io/codecov/c/github/okp4/template-python?style=for-the-badge&token=G5OBC2RQKX&logo=codecov)](https://codecov.io/gh/okp4/template-python)
+[![version](https://img.shields.io/github/v/release/okp4/data-join-tabular?style=for-the-badge&logo=github)](https://github.com/okp4/data-join-tabular/releases)
+[![lint](https://img.shields.io/github/actions/workflow/status/okp4/data-join-tabular/lint.yml?branch=main&label=lint&style=for-the-badge&logo=github)](https://github.com/okp4/data-join-tabular/actions/workflows/lint.yml)
+[![build](https://img.shields.io/github/actions/workflow/status/okp4/data-join-tabular/build.yml?branch=main&label=build&style=for-the-badge&logo=github)](https://github.com/okp4/data-join-tabular/actions/workflows/build.yml)
+[![test](https://img.shields.io/github/actions/workflow/status/okp4/data-join-tabular/test.yml?branch=main&label=test&style=for-the-badge&logo=github)](https://github.com/okp4/data-join-tabular/actions/workflows/test.yml)
+[![codecov](https://img.shields.io/codecov/c/github/okp4/data-join-tabular?style=for-the-badge&token=G5OBC2RQKX&logo=codecov)](https://codecov.io/gh/okp4/data-join-tabular)
 [![conventional commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg?style=for-the-badge&logo=conventionalcommits)](https://conventionalcommits.org)
 [![contributor covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg?style=for-the-badge)](https://github.com/okp4/.github/blob/main/CODE_OF_CONDUCT.md)
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg?style=for-the-badge)](https://opensource.org/licenses/BSD-3-Clause)
@@ -18,8 +18,11 @@ tags: []
 ## Purpose & Philosophy
 
 This repository contains data tabular join service.
+
 **Description**:
+
 2 sets of input data, giving 1 output with associated data based on a common column.
+
 **Specification**:
 
 - Read different file format (csv, geojson, shp)
@@ -113,7 +116,7 @@ poetry run data-join-tabular  join -i1 ./tests/data/inputs1/input_test1.csv -i2 
 
 > 🚨 do not fork this repository as it is a [template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template)
 
-1. Click on [Use this template](https://github.com/okp4/template-python/generate)
+1. Click on [Use this template](https://github.com/okp4/data-join-tabular/generate)
 2. Give a name to your project
 3. Wait until the first run of CI finishes
 4. Clone your new project and happy coding!
