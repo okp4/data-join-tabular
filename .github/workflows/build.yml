@@ -1,20 +1,15 @@
 name: Build
 
 on:
-  workflow_call:
-
   push:
     branches: [ main ]
-
   pull_request:
     branches: [ main ]
 
-concurrency:
-  group: build-${{ github.ref }}
-  cancel-in-progress: true
+  workflow_dispatch:
 
 jobs:
-  build-python:
+  build-project:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out repository
@@ -25,7 +20,7 @@ jobs:
           python-version: 3.9
 
       - name: Install Python Poetry
-        uses: abatilo/actions-poetry@v2.2.0
+        uses: abatilo/actions-poetry@v2.1.4
         with:
           poetry-version: 1.3.1
 
@@ -37,7 +32,7 @@ jobs:
         run: |
           poetry build
 
-  build-docker:
+  make-dockerimage:
     runs-on: ubuntu-22.04
     steps:
       - name: Check out repository

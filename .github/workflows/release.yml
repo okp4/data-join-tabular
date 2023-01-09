@@ -24,6 +24,12 @@ jobs:
       - test
     runs-on: ubuntu-22.04
     steps:
+      - name: Check that main branch builds
+        uses: benc-uk/workflow-dispatch@v121
+        with:
+          workflow: Build
+          token: ${{ secrets.OKP4_TOKEN }}
+
       - name: Check out repository
         uses: actions/checkout@v3
         with:
@@ -41,6 +47,7 @@ jobs:
           branch: main
           extra_plugins: |
             @semantic-release/changelog
+            @semantic-release/exec
             @semantic-release/git
             @google/semantic-release-replace-plugin
         env:
