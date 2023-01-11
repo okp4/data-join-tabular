@@ -4,10 +4,10 @@ on:
   workflow_call:
 
   push:
-    branches: [ main ]
+    branches: [main]
 
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 concurrency:
   group: lint-${{ github.ref }}
@@ -24,7 +24,8 @@ jobs:
           fetch-depth: 0
 
       - name: Check commits
-      
+        uses: wagoid/commitlint-github-action@v5
+
   lint-poetry:
     runs-on: ubuntu-22.04
     steps:
@@ -71,7 +72,7 @@ jobs:
       - name: Lint python code (mypy)
         uses: jpetrucciani/mypy-check@0.971
         with:
-          path: '.'
+          path: "."
 
   lint-dockerfile:
     runs-on: ubuntu-22.04
