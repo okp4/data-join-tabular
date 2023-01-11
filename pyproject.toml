@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "data-join-tabular"
-version = "0.1.0"
+version = "1.0.0"
 description = "data tabular join service"
 authors = ["opensource-OKP4 <opensource@okp4.com>"]
 license = "BSD 3-Clause License"
