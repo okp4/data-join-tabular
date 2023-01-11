@@ -18,12 +18,12 @@ plugins:
               hasChanged: true
               numMatches: 1
               numReplacements: 1
-        - files: [ data_join_tabular/__init__.py ]
+        - files: [ src/data_join_tabular/__init__.py ]
           from: ^__version__ = '.+'
           to: __version__ = '${nextRelease.version}'
           countMatches: true
           results:
-            - file: data_join_tabular/__init__.py
+            - file: src/data_join_tabular/__init__.py
               hasChanged: true
               numMatches: 1
               numReplacements: 1
@@ -31,7 +31,6 @@ plugins:
   - - "@semantic-release/git"
     - assets:
         - CHANGELOG.md
-        - LICENSE
-        - data_join_tabular/__init__.py
+        - src/data_join_tabular/__init__.py
         - pyproject.toml
       message: "chore(release): perform release ${nextRelease.version}"
