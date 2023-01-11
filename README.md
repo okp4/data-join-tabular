@@ -1,9 +1,3 @@
----
-noteId: "dc6b5190feb111ecae102f281db96559"
-tags: []
-
----
-
 # Data-join-tabular
 
 [![version](https://img.shields.io/github/v/release/okp4/data-join-tabular?style=for-the-badge&logo=github)](https://github.com/okp4/data-join-tabular/releases)
