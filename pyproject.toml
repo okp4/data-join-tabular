@@ -23,7 +23,7 @@ version_variable = [
 pytest-cov = "^4.1.0"
 click = "^8.1.7"
 pytest = "^7.4.0"
-flake8 = "^5.0.3"
+flake8 = "^6.1.0"
 mypy = "^0.991"
 black = "^22.6.0"
 
