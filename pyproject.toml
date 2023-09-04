@@ -24,7 +24,7 @@ pytest-cov = "^4.1.0"
 click = "^8.1.7"
 pytest = "^7.4.1"
 flake8 = "^5.0.3"
-mypy = "^0.991"
+mypy = "^1.5"
 black = "^22.6.0"
 
 [build-system]
